@@ -1,0 +1,18 @@
+# DIY Task Docker Compose
+#
+# Available image placeholders (substituted at runtime):
+#   __OSS_SIM_IMAGE__        - Simulation only (iverilog, verilator) - lightweight
+#   __PORTLE_OSS_CAD_IMAGE__ - Full toolchain (iverilog + yosys + nextpnr) - for synthesis tasks
+#
+# For simple simulation tasks, use __OSS_SIM_IMAGE__
+# For tasks needing synthesis/PnR, use __PORTLE_OSS_CAD_IMAGE__
+
+services:
+  direct:
+    image: __OSS_SIM_IMAGE__
+    volumes:
+      - ./rtl:/code/rtl:ro
+      - ./verif:/code/verif:ro
+      - ./src:/code/src:ro
+    working_dir: /code
+    command: python3 /code/src/test_runner.py

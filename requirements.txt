@@ -1,0 +1,8 @@
+# Core dependencies for running poRTLe scripts and UI
+numpy
+pandas
+matplotlib
+plotly
+streamlit
+streamlit-plotly-events
+pyyaml

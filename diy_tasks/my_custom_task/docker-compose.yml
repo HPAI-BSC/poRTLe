@@ -1,0 +1,9 @@
+services:
+  direct:
+    image: __OSS_SIM_IMAGE__
+    volumes:
+      - ./rtl:/code/rtl:ro
+      - ./verif:/code/verif:ro
+      - ./src:/code/src:ro
+    working_dir: /code
+    command: python3 /code/src/test_runner.py

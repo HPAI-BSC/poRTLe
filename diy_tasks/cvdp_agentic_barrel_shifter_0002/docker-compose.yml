@@ -1,0 +1,8 @@
+services:
+  direct:
+    image: __OSS_SIM_IMAGE__
+    volumes:
+      - ./src/:/src/:ro
+    working_dir: /code/rundir
+    env_file: ./src/.env
+    command: pytest -s --log-cli-level=INFO -o cache_dir=/rundir/harness/.cache /src/test_runner.py -v

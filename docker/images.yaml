@@ -1,0 +1,136 @@
+# poRTLe Docker Image Registry
+#
+# Central registry of Docker images used by poRTLe agents and benchmark runners.
+# This file documents available images and their purposes.
+
+# =============================================================================
+# Central poRTLe Images (built from docker/base/*)
+# =============================================================================
+portle_images:
+  agent-base:
+    tag: portle-agent-base:latest
+    dockerfile: docker/base/agent-base/Dockerfile
+    description: >
+      Base image for all poRTLe agents. Includes Python 3.12, Node.js 22.x,
+      and common dependencies. Agents inherit from this and add their
+      specific LLM tooling (opencode, codex, etc.) in their Dockerfile-agent.
+    template_placeholder: __PORTLE_AGENT_BASE__
+    provides:
+      - python3.12
+      - nodejs22
+      - iverilog
+      - verilator
+      - cocotb
+
+  opencode-base:
+    tag: portle-opencode-base:latest
+    dockerfile: docker/base/opencode-base/Dockerfile
+    depends_on: agent-base
+    description: >
+      Base image for opencode-based agents. Extends agent-base with
+      opencode-ai CLI pre-installed. Use this to avoid slow npm installs
+      on every agent rebuild.
+    template_placeholder: __PORTLE_OPENCODE_BASE__
+    provides:
+      - python3.12
+      - nodejs22
+      - iverilog
+      - verilator
+      - cocotb
+      - opencode-ai
+      - "@opencode-ai/plugin"
+
+  oss-cad-suite:
+    tag: portle-oss-cad-suite:latest
+    dockerfile: docker/base/oss-cad-suite/Dockerfile
+    oss_cad_suite_release: "2025-11-30"
+    description: >
+      Full open-source EDA toolchain. Use for tasks requiring simulation,
+      synthesis, AND place-and-route in a single container. Based on
+      YosysHQ OSS CAD Suite release 2025-11-30.
+    template_placeholder: __PORTLE_OSS_CAD_IMAGE__
+    provides:
+      - python3.12
+      - iverilog
+      - verilator
+      - yosys
+      - nextpnr-ecp5
+      - nextpnr-ice40
+      - riscv64-unknown-elf-gcc
+      - cocotb
+
+  oss-cad-suite-agent:
+    tag: portle-oss-cad-suite-agent:latest
+    dockerfile: docker/base/oss-cad-suite-agent/Dockerfile
+    description: >
+      Agent-focused image that layers the poRTLe agent dependencies
+      (Python 3.12 from source, Node.js 22.x, common Python deps)
+      on top of the full OSS CAD Suite toolchain. Use as the parent
+      image for agents that need both the agent stack and complete
+      open-source EDA tools.
+    provides:
+      - python3.12
+      - nodejs22
+      - iverilog
+      - verilator
+      - yosys
+      - nextpnr-ecp5
+      - nextpnr-ice40
+      - riscv64-unknown-elf-gcc
+      - cocotb
+
+  notsotiny-harness:
+    tag: portle-notsotiny-harness:latest
+    dockerfile: docker/base/notsotiny-harness/Dockerfile
+    description: >
+      OSS CAD Suite image with benchmark-specific Python deps for NotSoTiny
+      harnesses installed into the oss-cad-suite Python environment (cocotb/pytest).
+    provides:
+      - python3.12
+      - iverilog
+      - verilator
+      - yosys
+      - nextpnr-ecp5
+      - nextpnr-ice40
+      - riscv64-unknown-elf-gcc
+      - cocotb (1.9.1)
+      - pytest (8.2.2)
+
+# =============================================================================
+# External HDL Images (pre-built, pulled from registries)
+# =============================================================================
+external_images:
+  sim-osvb:
+    tag: ghcr.io/hdl/sim/osvb
+    description: >
+      Simulation-focused image with iverilog, verilator, and cocotb.
+      Use for simulation-only tasks.
+    template_placeholder: __OSS_SIM_IMAGE__
+    provides:
+      - iverilog
+      - verilator
+      - cocotb
+
+  impl-pnr:
+    tag: ghcr.io/hdl/impl/pnr
+    description: >
+      Synthesis and place-and-route image with yosys and nextpnr.
+      Does NOT include iverilog. Use for synthesis-only tasks.
+    template_placeholder: __OSS_PNR_IMAGE__
+    provides:
+      - yosys
+      - nextpnr-ecp5
+      - nextpnr-ice40
+
+# =============================================================================
+# Template Placeholder Reference
+# =============================================================================
+# Use these placeholders in docker-compose.yml files. They will be substituted
+# by the benchmark runner based on config values.
+#
+#   __OSS_SIM_IMAGE__       -> ghcr.io/hdl/sim/osvb (default)
+#   __OSS_PNR_IMAGE__       -> ghcr.io/hdl/impl/pnr (default)
+#   __PORTLE_AGENT_BASE__   -> portle-agent-base:latest
+#   __PORTLE_OSS_CAD_IMAGE__ -> portle-oss-cad-suite:latest
+#   __VERIF_EDA_IMAGE__     -> cvdp-cadence-verif:latest (commercial)
+#   __LICENSE_NETWORK__     -> licnetwork (for commercial tools)

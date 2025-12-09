@@ -1,0 +1,44 @@
+***Format Guide for <run_id>.json files. A seperate file for each run***
+
+run_id: unique id/name for the run - TODO how to generate (dakota-macbook-09-14-25)
+benchmark_id: link to benchmark table entry
+dataset_id: link to dataset table entry
+agent_id: link to the agents table entry
+
+hardware_info: what hardware it was run on or device name (dakota-macbook)
+n: how many times to run each task
+threads: how many execution threads
+
+run_start: datetime when the run started
+run_end: datetime when the run ended
+total_time: datetime of the total time of the run
+
+metadata: json structure to hold all the data added
+	- keys: list of keys, to be able to sort the specific data by (["high-priority", "development"])
+	- notes: list of notes added to the item
+		- date_added: date the note was added (11-14-25)
+		- author: author of the person that added the note (Dakota Barnes)
+		- text: note text ("After looking at cid004, agent needs to handle context better")
+	- custom: json of any custom data that you wish to add
+		- agent_repo_name: repository where the agent is from ()
+		- agent_repo_commit: commit hash of the agent ()
+		- benchmark_repo_name: repository where the benchmark is from ()
+		- benchmark_repo_commit: commit hash of the benchmark ()
+
+datapoints (list/dictionary of datapoints)
+	    datapoint_id: unique id for the datapoint - TODO how to generate
+        benchmark_id: link to benchmark table entry
+        dataset_id: link to dataset table entry
+        task_id: link to the task table entry
+        agent_id: link to the agents table entry
+        run_id: link to the run table entry
+
+        tokens: amount of tokens used on task, -1 if unavailable (654432)
+        time: amount of time to run datapoint in seconds (3452)
+        error: error from running the task, 0 for no error (-1)
+        score: how the agent did on the task, from 0-1 to support percents, 0=fail, 1=pass
+
+        metadata: json structure to hold all the data added
+            - keys: list of keys, to be able to sort the specific data by (["high-priority", "development"])
+            - notes: list of notes added to the item with the keys (date_added, author, note)
+            - custom: json of any custom data that you wish to add

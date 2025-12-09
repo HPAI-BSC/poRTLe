@@ -1,0 +1,15 @@
+***Example entry for the agents.json file that will contain many saved agents.***
+
+agent_id: unique id/name for the agent (opencode-skills-v1-091525)
+about: description of the model ("first try using skills on opencode agent") 
+
+agent_config: json structure to hold the specific agent settings (don't change)
+	- backend_model: primary model powering agent (kimi-k2-thinking)
+	- custom (holds params that are not universal between agents)
+		- opencode_config_param: some opencode param (1)
+
+metadata: json structure to hold all the data added
+	- keys: list of keys, to be able to sort the specific data by (["high-priority", "development"])
+	- notes: list of notes added to the item with the keys (date_added, author, note)
+	- custom: json of any custom data that you wish to add
+		-

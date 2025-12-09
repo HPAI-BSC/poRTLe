@@ -1,0 +1,41 @@
+FROM cvdp-opencode-agent-base
+
+# Agent code lives here
+# Note: Base image now inherits from portle-agent-base (Python 3.12 + Node.js + EDA tools)
+WORKDIR /app
+
+# Workspace where OpenCode should read/write project files
+RUN mkdir -p /code && chmod 777 /code
+
+# Make OpenCode cache/state/data live under /code (not /)
+# This also satisfies OpenCode's ~/.cache/opencode and ~/.local/share/opencode layout.
+ENV HOME=/code \
+    XDG_CACHE_HOME=/code/.cache \
+    XDG_STATE_HOME=/code/.local/state \
+    XDG_DATA_HOME=/code/.local/share \
+    NPM_CONFIG_CACHE=/code/.npm
+
+# (Optional) If you have an auth.json at build-time, drop it into the XDG data dir.
+COPY auth.json /tmp/auth.json
+RUN mkdir -p /code/.local/share/opencode && \
+    mv /tmp/auth.json /code/.local/share/opencode/auth.json && \
+    chmod 644 /code/.local/share/opencode/auth.json
+
+# Ensure expected dirs exist for OpenCode/XDG at runtime
+RUN mkdir -p \
+      /code/.cache/opencode \
+      /code/.local/share/opencode \
+      /code/.local/state \
+      /code/.npm && \
+    chmod -R 777 /code/.cache /code/.local /code/.npm
+
+# Add agent code
+COPY agent.py prompts.py opencode.json ./
+COPY opencode.json /code/opencode.json
+
+# opencode should already be on PATH from the base image (npm global -> /usr/local/bin)
+# Export PATH defensively in case environment differs
+ENV PATH="/usr/local/bin:${PATH}"
+
+# Entry
+ENTRYPOINT ["python3.12", "/app/agent.py"]

@@ -1,0 +1,37 @@
+***Format Guide for <benchmark_name>_benchmark.json files. One seperate file for each benchmark***
+
+benchmark_id: unique benchmark that you are running. FIrst part is in the .db filename CVDP 
+
+metadata: json structure to hold all the data added
+	- keys: list of keys, to be able to sort the specific data by (["high-priority", "development"])
+	- notes: list of notes added to the item with the keys (date_added, author, note)
+	- custom: json of any custom data that you wish to add
+		- human_fairness_score: human ranking how fair a task is 0-1 (0.60)
+		- agent_fairness_score: agent ranking how fair a task is 0-1 (0.50)
+
+dataset (list or dict)
+    dataset_id: unique dataset that you are running (cvdp_v1.0.2_agentic_code_generation_no_commercial)
+    benchmark_id: link to benchmark table entry
+
+    commercial: if a paid license is required to run the dataset (yes,no)
+    task_count: the number of tasks in the dataset
+
+    metadata: json structure to hold all the data added
+        - keys: list of keys, to be able to sort the specific data by (["high-priority", "development"])
+        - notes: list of notes added to the item with the keys (date_added, author, note)
+        - custom: json of any custom data that you wish to add
+                - cvdp_workflow: non-agentic, agentic
+
+    tasks (list or dict)
+        task_id: unique task that you are running cvdp_agentic_DES_0005, cvdp_agentic_gcd_0007
+        benchmark_id: link to benchmark table entry
+        dataset_id: link to dataset table entry
+
+        metadata: json structure to hold all the data added
+            - keys: list of keys, to be able to sort the specific data by (["high-priority", "development"])
+            - notes: list of notes added to the item with the keys (date_added, author, note)
+            - custom: json of any custom data that you wish to add
+                - cvdp_difficulty: cvdp difficulty measure (easy, medium, or hard)
+                - cvdp_cid: cvdp cid number (cid004, cid005...etc)
+
+

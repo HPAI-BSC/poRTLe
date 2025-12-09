@@ -1,0 +1,21 @@
+# Example Agent Dockerfile
+#
+# Inherits from central portle-agent-base which provides:
+# - Python 3.12, Node.js 22.x, simulation tools (iverilog, verilator)
+#
+# For agents needing additional tools (opencode, codex), add them here:
+#   RUN npm install -g opencode-ai
+
+ARG BASE_IMAGE=portle-agent-base:latest
+FROM ${BASE_IMAGE}
+
+WORKDIR /app
+
+# Create /code directory and set permissions
+RUN mkdir -p /code && chmod 777 /code
+
+# Copy agent code
+COPY agent.py .
+
+# Set the entrypoint
+ENTRYPOINT ["python3.12", "/app/agent.py"]

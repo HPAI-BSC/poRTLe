@@ -1,0 +1,9 @@
+# poRTLe UI Requirements
+# Install with: pip install -r requirements.txt
+
+streamlit==1.40.0
+plotly==5.24.0
+pandas==2.2.0
+numpy==2.1.0
+pyyaml==6.0.1
+streamlit-plotly-events==0.0.6

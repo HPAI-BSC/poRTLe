@@ -1,0 +1,9 @@
+services:
+  direct:
+    command: python3 /src/verilogeval_cvdp_harness.py
+    env_file: ./src/.env
+    image: portle-oss-cad-suite:latest
+    volumes:
+    - ./src/:/src/
+    - ./rtl/:/rtl/
+    working_dir: /code/rundir

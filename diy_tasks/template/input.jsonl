@@ -1,0 +1,1 @@
+{"id": "cvdp_agentic_custom_task_0001", "categories": ["cid100", "easy"], "system_message": "", "prompt": "Only read a **single** file from rtl/ and summarize the contents into a new file located at rtl/portle.md. Return as soon as you are done."}

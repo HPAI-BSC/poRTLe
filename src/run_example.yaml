@@ -1,0 +1,16 @@
+
+# Copy to src/run.yaml to run this example
+agent_id: dakota-destroyer
+benchmark_id: cvdp_example
+dataset_id: cvdp_example__cvdp_example_no_commercial_1
+hardware_info: local-machine
+# adapter: cvdp  # Optional: Specify which benchmark adapter to use (defaults to benchmark_id.lower())
+metadata:
+  custom: {}
+  keys:
+  - ui-generated
+  notes: []
+n: 1
+task_ids:
+- cvdp_example__cvdp_example_no_commercial_1__cvdp_agentic_barrel_shifter_0002
+threads: 1
