@@ -1,0 +1,47 @@
+.claude
+*.pyc
+**/__pycache__/
+__pycache__/
+.DS_Store
+.vscode/
+
+# Ignore all Benchmark Datasets except the example
+benchmark_datasets/*
+!benchmark_datasets/cvdp_example/
+!benchmark_datasets/README.md
+*copilot_transformed.jsonl
+
+# Ignore all Benchmark Runners
+benchmark_runners/*
+
+# Ignore all results (from poRTLe_data)
+results/*
+results*/
+tmp/
+*.db
+external/
+
+# Ignore all agents added by users
+agents/*
+!agents/README.md
+!agents/example-agent/
+!agents/opencode-agent/
+portle_config.json
+
+# Ignore all diy tasks added by users
+diy_tasks/*
+!diy_tasks/README.md
+!diy_tasks/cvdp_agentic_barrel_shifter_0002/
+!diy_tasks/my_custom_task/
+!diy_tasks/template/
+!diy_tasks/clean_task.py
+
+# Ignore run.yaml files generated per run
+run.yaml
+
+# Other
+package-lock.json
+# .agent/
+
+# Streamlit secrets (passwords, etc.)
+.streamlit/secrets.toml

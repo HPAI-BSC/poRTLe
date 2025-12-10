@@ -1,0 +1,126 @@
+{
+  "benchmark_id": "cvdp_example",
+  "metadata": {
+    "keys": [],
+    "notes": [],
+    "custom": {}
+  },
+  "datasets": [
+    {
+      "dataset_id": "cvdp_example__cvdp_example_no_commercial_1",
+      "benchmark_id": "cvdp_example",
+      "commercial": "no",
+      "task_count": 3,
+      "metadata": {
+        "keys": [],
+        "notes": [],
+        "custom": {
+          "cvdp_workflow": "agentic",
+          "source_dataset_id": "cvdp_example_no_commercial_1"
+        }
+      },
+      "tasks": [
+        {
+          "task_id": "cvdp_example__cvdp_example_no_commercial_1__cvdp_agentic_fixed_arbiter_0001",
+          "benchmark_id": "cvdp_example",
+          "dataset_id": "cvdp_example__cvdp_example_no_commercial_1",
+          "metadata": {
+            "keys": [],
+            "notes": [],
+            "custom": {
+              "cvdp_cid": "cid003",
+              "cvdp_difficulty": "easy",
+              "source_task_id": "cvdp_agentic_fixed_arbiter_0001"
+            }
+          }
+        },
+        {
+          "task_id": "cvdp_example__cvdp_example_no_commercial_1__cvdp_agentic_arithmetic_progression_generator_0001",
+          "benchmark_id": "cvdp_example",
+          "dataset_id": "cvdp_example__cvdp_example_no_commercial_1",
+          "metadata": {
+            "keys": [],
+            "notes": [],
+            "custom": {
+              "cvdp_cid": "cid016",
+              "cvdp_difficulty": "easy",
+              "source_task_id": "cvdp_agentic_arithmetic_progression_generator_0001"
+            }
+          }
+        },
+        {
+          "task_id": "cvdp_example__cvdp_example_no_commercial_1__cvdp_agentic_barrel_shifter_0002",
+          "benchmark_id": "cvdp_example",
+          "dataset_id": "cvdp_example__cvdp_example_no_commercial_1",
+          "metadata": {
+            "keys": [],
+            "notes": [],
+            "custom": {
+              "cvdp_cid": "cid004",
+              "cvdp_difficulty": "easy",
+              "source_task_id": "cvdp_agentic_barrel_shifter_0002"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "cvdp_example__cvdp_example_no_commercial_2",
+      "benchmark_id": "cvdp_example",
+      "commercial": "no",
+      "task_count": 3,
+      "metadata": {
+        "keys": [],
+        "notes": [],
+        "custom": {
+          "cvdp_workflow": "agentic",
+          "source_dataset_id": "cvdp_example_no_commercial_2"
+        }
+      },
+      "tasks": [
+        {
+          "task_id": "cvdp_example__cvdp_example_no_commercial_2__cvdp_agentic_binary_to_gray_0003",
+          "benchmark_id": "cvdp_example",
+          "dataset_id": "cvdp_example__cvdp_example_no_commercial_2",
+          "metadata": {
+            "keys": [],
+            "notes": [],
+            "custom": {
+              "cvdp_cid": "cid003",
+              "cvdp_difficulty": "easy",
+              "source_task_id": "cvdp_agentic_binary_to_gray_0003"
+            }
+          }
+        },
+        {
+          "task_id": "cvdp_example__cvdp_example_no_commercial_2__cvdp_agentic_digital_stopwatch_0001",
+          "benchmark_id": "cvdp_example",
+          "dataset_id": "cvdp_example__cvdp_example_no_commercial_2",
+          "metadata": {
+            "keys": [],
+            "notes": [],
+            "custom": {
+              "cvdp_cid": "cid005",
+              "cvdp_difficulty": "easy",
+              "source_task_id": "cvdp_agentic_digital_stopwatch_0001"
+            }
+          }
+        },
+        {
+          "task_id": "cvdp_example__cvdp_example_no_commercial_2__cvdp_agentic_nbit_swizzling_0001",
+          "benchmark_id": "cvdp_example",
+          "dataset_id": "cvdp_example__cvdp_example_no_commercial_2",
+          "metadata": {
+            "keys": [],
+            "notes": [],
+            "custom": {
+              "cvdp_cid": "cid003",
+              "cvdp_difficulty": "easy",
+              "source_task_id": "cvdp_agentic_nbit_swizzling_0001"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

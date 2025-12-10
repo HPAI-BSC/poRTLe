@@ -1983,7 +1983,7 @@ def render_create_diy_task_tab():
 
         Your task directory should contain:
 
-        - **`rtl/`** - Your RTL code (SystemVerilog, Verilog)
+        - **`rtl/`** - (required) Your RTL code (SystemVerilog, Verilog)
           - By default: included in `context` (agent can access it)
           - Optional: can be placed in `patch` as expected solution (for design tasks)
           - ⚠️ **Only include source code** - no Git repos, binaries, or PDFs
@@ -1997,12 +1997,12 @@ def render_create_diy_task_tab():
           - Testbenches, verification scripts
           - Will be provided to the agent as context
 
-        - **`src/`** (optional) - Test harness
-          - Test runners, helper scripts
+        - **`src/`** (required) - Test harness
+          - Test runners, helper scripts, env
           - Will be included in the test harness
-          - Example: test_runner.py, harness_library.py
+          - test_runner.py, .env
 
-        - **`docker-compose.yml`** (optional) - Docker configuration
+        - **`docker-compose.yml`** (required) - Docker configuration
           - Will be included in the test harness
 
         ### Example Structure

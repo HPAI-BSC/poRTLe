@@ -1,40 +1,65 @@
-FROM cvdp-opencode-agent-base
+# OpenCode Agent Dockerfile
+#
+# Inherits from portle-opencode-base which provides:
+# - Python 3.12, Node.js 22.x, simulation tools (iverilog, verilator)
+# - opencode-ai CLI pre-installed (fast rebuilds!)
+#
+# This is a parallel multi-agent version with RTL and testbench coding in parallel.
+# Set "prompt_name" in portle_config.json to select which prompt runs.
 
-# Agent code lives here
-# Note: Base image now inherits from portle-agent-base (Python 3.12 + Node.js + EDA tools)
+ARG BASE_IMAGE=portle-opencode-base:latest
+FROM ${BASE_IMAGE}
+
 WORKDIR /app
 
 # Workspace where OpenCode should read/write project files
+# Note: /code/rundir/.opencode will be created by agent.py and persists after container exit
 RUN mkdir -p /code && chmod 777 /code
 
-# Make OpenCode cache/state/data live under /code (not /)
-# This also satisfies OpenCode's ~/.cache/opencode and ~/.local/share/opencode layout.
-ENV HOME=/code \
-    XDG_CACHE_HOME=/code/.cache \
-    XDG_STATE_HOME=/code/.local/state \
-    XDG_DATA_HOME=/code/.local/share \
-    NPM_CONFIG_CACHE=/code/.npm
+# Note: Git repository initialization is done at runtime in agent.py
+# because /code is mounted from the host at container start, which would
+# replace any .git directory created during the build phase.
 
-# (Optional) If you have an auth.json at build-time, drop it into the XDG data dir.
-COPY auth.json /tmp/auth.json
-RUN mkdir -p /code/.local/share/opencode && \
-    mv /tmp/auth.json /code/.local/share/opencode/auth.json && \
-    chmod 644 /code/.local/share/opencode/auth.json
 
-# Ensure expected dirs exist for OpenCode/XDG at runtime
-RUN mkdir -p \
-      /code/.cache/opencode \
-      /code/.local/share/opencode \
-      /code/.local/state \
-      /code/.npm && \
-    chmod -R 777 /code/.cache /code/.local /code/.npm
+# =============================================================================
+# XDG Directory Configuration for OpenCode
+# =============================================================================
+# All OpenCode data is stored in /code/rundir/.opencode/ which persists after
+# the container exits (since /code/rundir is mounted from the host).
+#
+# Directory structure:
+#   /code/rundir/.opencode/
+#   ├── cache/opencode/     # XDG_CACHE_HOME - OpenCode cache
+#   ├── state/              # XDG_STATE_HOME - OpenCode state files
+#   ├── share/opencode/     # XDG_DATA_HOME - Auth and data
+#   │   └── auth.json
+#   ├── raw.ndjson          # Raw NDJSON output
+#   ├── logs/               # Full detailed logs
+#   ├── summary.txt         # Token usage summary
+#   └── archives/           # Failed attempt archives
+# =============================================================================
 
-# Add agent code
-COPY agent.py prompts.py opencode.json ./
+ENV HOME=/code/rundir \
+    XDG_CONFIG_HOME=/code/.config \
+    XDG_CACHE_HOME=/code/rundir/.opencode/cache \
+    XDG_STATE_HOME=/code/rundir/.opencode/state \
+    XDG_DATA_HOME=/code/rundir/.opencode/share \
+    NPM_CONFIG_CACHE=/code/rundir/.opencode/cache/npm
+
+# Copy auth.json to /app for later copying by agent.py into .opencode/share/opencode/
+# (Can't copy directly to /code/rundir/.opencode since that's mounted at runtime)
+COPY auth.json /app/auth.json
+
+# Install Python dependencies
+COPY requirements.txt ./
+RUN python3.12 -m pip install --no-cache-dir -r requirements.txt
+
+# Add agent code and config
+COPY agent.py opencode.json portle_config.json ./
 COPY opencode.json /code/opencode.json
 
-# opencode should already be on PATH from the base image (npm global -> /usr/local/bin)
-# Export PATH defensively in case environment differs
+
+# opencode should already be on PATH from npm global install
 ENV PATH="/usr/local/bin:${PATH}"
 
 # Entry

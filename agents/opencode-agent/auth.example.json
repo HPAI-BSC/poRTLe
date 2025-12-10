@@ -1,5 +1,5 @@
 {
-  "vllm": {
+  "openrouter": {
     "type": "api",
     "key": "EMPTY"
   }

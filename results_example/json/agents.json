@@ -1,0 +1,46 @@
+[
+  {
+    "agent_id": "example__none",
+    "about": "Example agent from cvdp ",
+    "agent_config": {
+      "backend_model": "none",
+      "agent_folder_path": "agents/example-agent",
+      "custom": {}
+    },
+    "metadata": {
+      "keys": [],
+      "notes": [],
+      "custom": {}
+    }
+  },
+  {
+    "agent_id": "opencode__kimi-k2-0905",
+    "about": "Example opencode agent powered by openrouter kimi-k2-0905",
+    "agent_config": {
+      "backend_model": "kimi-k2-0905",
+      "agent_folder_path": "agents/opencode-agent",
+      "custom": {}
+    },
+    "metadata": {
+      "keys": [],
+      "notes": [],
+      "custom": {}
+    }
+  },
+  {
+    "agent_id": "llm__gpt-5-mini",
+    "about": "Openai gpt-5-mini called with OPENAI_USER_KEY configured in benchmark_runners/cvdp_benchmark/.env",
+    "agent_config": {
+      "backend_model": "gpt-5-mini",
+      "agent_folder_path": "none",
+      "custom": {
+        "cvdp_llm_name": "gpt-5-mini"
+      }
+    },
+    "metadata": {
+      "keys": [],
+      "notes": [],
+      "custom": {}
+    }
+  }
+]

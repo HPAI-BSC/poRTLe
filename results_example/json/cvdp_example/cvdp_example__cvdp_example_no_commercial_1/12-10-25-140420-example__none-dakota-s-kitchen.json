@@ -1,0 +1,46 @@
+{
+  "run_id": "12-10-25-140420-example__none-dakota-s-kitchen",
+  "benchmark_id": "cvdp_example",
+  "dataset_id": "cvdp_example__cvdp_example_no_commercial_1",
+  "agent_id": "example__none",
+  "hardware_info": "dakota-s-kitchen",
+  "n": 1,
+  "threads": 1,
+  "is_partial_run": true,
+  "run_start": "2025-12-10T14:04:20.660585",
+  "run_end": "2025-12-10T14:04:30.465578",
+  "total_time": "9.80s",
+  "run_directory": "/Users/dakotabarnes/Develop/BSC/quickstart/poRTLe/results/tmp/cvdp_example/cvdp_example__cvdp_example_no_commercial_1/12-10-25-140420-example__none-dakota-s-kitchen",
+  "metadata": {
+    "custom": {},
+    "keys": [
+      "ui-generated"
+    ],
+    "notes": []
+  },
+  "datapoints": [
+    {
+      "datapoint_id": "12-10-25-140420-example__none-dakota-s-kitchen-cvdp_example__cvdp_example_no_commercial_1__cvdp_agentic_barrel_shifter_0002-000",
+      "benchmark_id": "cvdp_example",
+      "dataset_id": "cvdp_example__cvdp_example_no_commercial_1",
+      "task_id": "cvdp_example__cvdp_example_no_commercial_1__cvdp_agentic_barrel_shifter_0002",
+      "agent_id": "example__none",
+      "run_id": "12-10-25-140420-example__none-dakota-s-kitchen",
+      "tokens": 36444,
+      "time": 7.805000066757202,
+      "error": 1,
+      "score": 0.0,
+      "metadata": {
+        "keys": [],
+        "notes": [],
+        "custom": {
+          "source_task_id": "cvdp_agentic_barrel_shifter_0002",
+          "source_dataset_id": "cvdp_example_no_commercial_1",
+          "sample_index": 0,
+          "datapoint_directory": "/Users/dakotabarnes/Develop/BSC/quickstart/poRTLe/results/tmp/cvdp_example/cvdp_example__cvdp_example_no_commercial_1/12-10-25-140420-example__none-dakota-s-kitchen",
+          "test_harness_time": 1.9210162162780762
+        }
+      }
+    }
+  ]
+}

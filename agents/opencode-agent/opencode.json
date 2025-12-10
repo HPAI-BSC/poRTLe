@@ -7,13 +7,31 @@
           "id": "qwen/qwen3-coder-30b-a3b-instruct",
           "name": "Qwen3-Coder-30B-A3B-Instruct"
         },
+        "qwen3-coder-480b": {
+          "id": "qwen/qwen3-coder:exacto",
+          "name": "Qwen3-Coder-480B-A35B-Instruct"
+        },
         "kimi-k2-thinking": {
           "id": "moonshotai/kimi-k2-thinking",
           "name": "Kimi-K2-Thinking"
+        },
+        "kimi-k2-0905": {
+          "id": "moonshotai/kimi-k2-0905:exacto",
+          "name": "Kimi-K2-0905"
         }
       }
     }
   },
-  "model": "openrouter/kimi-k2-thinking",
-  "small_model": "openrouter/kimi-k2-thinking"
+  "permission": {
+    "external_directory": "allow",
+    "bash": "allow",
+    "edit": "allow"
+  },
+  "keybinds": {
+    "leader": "cmd",
+    "session_child_cycle": "cmd+right",
+    "session_child_cycle_reverse": "cmd+left"
+  },
+  "small_model": "openrouter/kimi-k2-0905",
+  "model": "openrouter/kimi-k2-0905"
 }

@@ -40,7 +40,15 @@ pip install -r requirements.txt
 
 Reactivate `.venv` in every new shell and run `deactivate` when you are finished.
 
-### 3. Launch the UI Shell
+### 3. Set Up Results Directory
+
+Copy the example results to initialize the results directory:
+
+```bash
+cp -r results_example/. results/
+```
+
+### 4. Launch the UI Shell
 
 Start Streamlit to drive most workflows through the graphical interface:
 
@@ -52,38 +60,53 @@ Open `http://localhost:8501` (the app may take a few seconds to load on first la
 
 > **Tip:** Most operations can be performed directly inside the UI instead of running Python scripts manually.
 
-### 4. Prepare Benchmark Data
 
-- **UI path:** In the **Commands ▸ Build Benchmark** tab, enter `cvdp_example` and click **Build Benchmark**. The database will be automatically rebuilt.
-- **CLI alternative:**
+### 5. Run Benchmarks and View Results
 
-  ```bash
-  python src/build_benchmark_json.py cvdp_example
-  python src/build_datatable.py
-  ```
+**Note:** You must have your Docker daemon running in the background for this to work.
 
-### 5. Register an Agent
+#### Run the Example Agent
 
-- **UI path:** Use **Commands ▸ Add Agent**. Supply a unique ID, model name, description, and set *Agent Folder Path* to `agents/example-agent` (or your custom agent). Click **Add Agent**.
-- **CLI alternative:** Run `src/add_agent.py` with your metadata (example values shown below):
+Start with the example agent to verify your setup:
 
-  ```bash
-  python src/add_agent.py \
-    --agent-id my-agent \
-    --about "Sample agent for cvdp_example" \
-    --backend-model sandbox-model \
-    --agent-folder agents/example-agent
-  ```
-
-### 6. Run Benchmarks and View Results
-
-- **UI path:** In **Commands ▸ Run Benchmark**, select the `cvdp_example` benchmark and your agent, configure options (background execution, task filters, execution mode), then click **Run Benchmark**. Monitor progress in the **Process Monitor** tab. Afterwards, explore results in the **Plots** tab (double-click cells for drill-down) or the **Search** tab for database queries.
+- **UI path:** In **Commands ▸ Run Benchmark**, select the `cvdp_example` benchmark and the example agent, configure options (background execution, task filters, execution mode), then click **Run Benchmark**. Monitor progress in the **Process Monitor** tab. Afterwards, explore results in the **Plots** tab (double-click cells for drill-down) or the **Search** tab for database queries.
 - **CLI alternative:** Configure and execute the dataset runner:
 
   ```bash
   cp src/run_example.yaml src/run.yaml        # configure once
   python src/run_dataset.py
   ```
+
+#### Run the OpenCode Agent
+
+Once you've verified the example agent works, try the OpenCode agent:
+
+1. First, follow the setup instructions in [agents/opencode-agent/README.md](agents/opencode-agent/README.md) to configure your API key.
+2. Then run benchmarks using the `opencode` agent in the UI or CLI.
+
+#### Run LLM with Force-Copilot
+
+To run benchmarks using direct LLM calls (no Docker agent):
+
+1. Set your OpenAI API key in `benchmark_runners/cvdp_benchmark/.env`:
+
+   ```bash
+   OPENAI_USER_KEY=sk-your-openai-api-key-here
+   ```
+
+2. In **Commands ▸ Run Benchmark**, select the `llm_gpt-5-mini` agent (pre-configured).
+3. Set **Execution Mode** to **LLM Mode (force-copilot)**.
+4. Run the benchmark.
+
+To use other LLMs, add models to the model factory in the benchmark runner. Ensure you set the `cvdp_llm_name` when you add a new agent that matches the cvdp model factory name.
+
+#### View Results
+
+After a successful run:
+
+1. Check `results/tmp/` for raw run output and logs.
+2. Go to **Commands ▸ Build Database** to load your results into the SQLite database.
+3. View results in the **Plots** tab (heatmaps, drill-down) or **Search** tab (database queries).
 
 ## Project Structure
 
