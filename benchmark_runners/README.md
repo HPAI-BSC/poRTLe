@@ -4,7 +4,11 @@
 
 ## Overview
 
-This directory contains benchmark-specific runner scripts that execute tasks and evaluate agent performance. Each benchmark requires its own runner implementation.
+### These instructions highlight how to add CVDP as your benchmark runner and create a new benchmark runner if desired.
+
+We separate benchmarks from benchmark runners. Currently poRTLe supports one benchmark runner (CVDP) as it is gives us the flexibility to run any agent or LLM on a given task within a Docker container. When integrating new benchmarks (VerilogEval, RTLLM, etc.) into poRTLe we use CVDP as our benchmark runner, meaning we use an adapter (src/datasets/builders) to construct a dataset of all tasks and eval harnesses from the benchmark in CVDP's runner expected format. With this distinciton between benchmarks and benchmark runners, we can easily incorporate new features added to CVDP to ANY benchmark that uses CVDP as its runner.
+
+If a new benchmark is released that has a more capable or well-fit runner than CVDP that you wish to use (ex. Running agents in Singularity containers instead of Docker), then you must create a new benchmark runner and follow these instructions.
 
 ## Directory Structure
 
@@ -12,7 +16,6 @@ This directory contains benchmark-specific runner scripts that execute tasks and
 benchmark_runners/
 ├── README.md (this file)
 ├── cvdp_benchmark/ (not tracked - clone externally)
-├── turtle_benchmark/ (not tracked - clone externally)
 └── [your-benchmark]_benchmark/ (not tracked - clone externally)
 ```
 

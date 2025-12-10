@@ -23,6 +23,15 @@ Clone the external projects that live in gitignored directories (only the runner
 - **`benchmark_datasets/`** – Benchmark task datasets (optional extras for Quick Start; see [README](benchmark_datasets/README.md)).
 - **`agents/`** – Agent implementations (optional; see [README](agents/README.md)).
 - **`results/`** – Shared results repository (optional for Quick Start; see [README](results/README.md)).
+- **`src/datasets/builders/dataset_repos/`** – Source repos used by dataset builders. To build or regenerate TuRTLe-based datasets (RTLLM, VerilogEval via CVDP), clone TuRTLe here:
+
+  ```bash
+  git clone https://github.com/HPAI-BSC/TuRTLe src/datasets/builders/dataset_repos/TuRTLe
+  ```
+
+  Any new benchmark you integrate via CVDP should have its source data cloned into this shared `dataset_repos/` directory.
+
+If you’re creating a new **runner** (execution stack) follow the docs under `benchmark_runners/`. If you’re adding a new **benchmark dataset** for an existing runner (e.g., CVDP), see `src/datasets/builders/README.md` for the builder workflow and required folder layout.
 
 **Note:** `results/` is its **own git repository** so teams can share benchmark data independently of the main codebase.
 
