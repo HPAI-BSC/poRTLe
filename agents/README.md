@@ -2,6 +2,13 @@
 
 > **Note:** The contents of this directory are **not tracked by git** (see `.gitignore`). Clone external agent projects into this directory to use them with poRTLe.
 
+You can drop in **any agent implementation** you already have—LLM-based or not. The only contract for CVDP benchmarks is that the container runs `agent.py` and that your code can edit files in `/rtl` (and other task folders). Your agent can be:
+- A hand-written deterministic script.
+- Built on frameworks (e.g., LangGraph) or general-purpose coding agents (e.g., OpenCode, Claude, etc.).
+- Fully custom scratch code.
+
+Bundle everything the agent needs (code, configs, model clients, libraries) into the agent folder and its `Dockerfile-agent` so the container has all dependencies at runtime.
+
 ## Overview
 
 This directory contains AI agent implementations that can be tested against benchmarks. Each agent should be a self-contained project directory.
@@ -43,7 +50,7 @@ These are located in `docker/base/` and built automatically when you run benchma
 
 ```bash
 # Build all central images
-./docker/build.sh all
+./docker/build.sh
 
 # Build specific image
 ./docker/build.sh agent-base

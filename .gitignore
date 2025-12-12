@@ -48,3 +48,6 @@ package-lock.json
 
 # Streamlit secrets (passwords, etc.)
 .streamlit/secrets.toml
+
+# Opencode authentication file
+auth.json
