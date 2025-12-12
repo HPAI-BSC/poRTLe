@@ -2,11 +2,15 @@
 
 **poRTLe** is a platform for running, tracking, and analyzing AI agent performance across RTL benchmarks, datasets, and tasks.
 
-Developed by Dakota Barnes and Nik Belle during an internship at Barcelona Supercomputing Center.
+It was developed by **Dakota Barnes** and **Nik Belle** during an internship at Barcelona Supercomputing Center.
 
 Contact [nbelle@ucsb.edu](mailto:nbelle@ucsb.edu) and [dakotabarnes@ucsb.edu](mailto:dakotabarnes@ucsb.edu) with any questions, suggestions, or discussion. We are excited to hear about its potential use cases across the community.
 
 Check out poRTLe's demo site at: [https://portle.hpai.bsc.es](https://portle.hpai.bsc.es)
+
+## Motivation
+
+Research on AI agents for RTL design is fragmented across benchmarks, toolchains, and evaluation practices, making fair comparison, iteration, and collaboration difficult. Agent failures are often hard to attribute to model limitations versus task ambiguity, and benchmarks lack feedback loops for improvement. poRTLe provides a unified platform to run agents across multiple RTL benchmarks, track results with rich metadata, and analyze failures systematically. It enables easy creation and modification of tasks, supports evaluation across different architectures, and serves as a shared collaboration layer between hardware engineers and AI agent developers.
 
 ## Overview
 
